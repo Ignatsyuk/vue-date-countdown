@@ -1,0 +1,34 @@
+{
+  "name": "vue-date-countdown",
+  "version": "0.1.0",
+  "description": "Simple Vue 3 component for countdown to a specific date",
+  "author": "merik",
+  "keywords": [
+    "vue",
+    "countdown",
+    "date",
+    "time",
+    "simple",
+    "component"
+  ],
+  "repository": "https://github.com/Ignatsyuk/vue-date-countdown",
+  "license": "MIT",
+  "main": "./dist/date-countdown.umd.js",
+  "module": "./dist/date-countdown.es.js",
+  "exports": {
+    ".": {
+      "require": "./dist/date-countdown.umd.js",
+      "import": "./dist/date-countdown.es.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.3.4",
+    "vite": "^4.4.9"
+  }
+}
