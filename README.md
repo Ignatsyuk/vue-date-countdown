@@ -33,11 +33,16 @@ app.use(DateCountdown);
 
 ## Usage
 
+Use object from `v-slot` to get access to countdown values `days`, `hours`, `minutes` and `hours`:
+
 ```html
-<DateCountdown 
-    :start-date="Date.now()" 
-    :end-date="Date.now() + 60000"
-/>
+<DateCountdown v-slot="date" :end-date="Date.now() + 60000">
+  Before Birthday:
+  {{ date.days }} days
+  {{ date.hours } hours
+  {{ date.minutes }} minutes
+  {{ date.seconds }} seconds
+</DateCountdown>
 ``` 
 
 ### props
@@ -45,7 +50,9 @@ app.use(DateCountdown);
 [required] The date on which the countdown will end
 
 ```html
-<DateCountdown :end-date="Date.now() + 60000" />
+<DateCountdown :end-date="Date.now() + 60000" v-slot="date">
+  {{ date.minutes }} min
+</DateCountdown>
 ```
 
 #### - `start-date`
@@ -55,7 +62,10 @@ The date from which the countdown began. By default, it's `new Date()`
 <DateCountdown
   :start-date="Date.now()"
   :end-date="Date.now() + 60000"
-/>
+  v-slot="date"
+>
+  {{ date.minutes }} min
+</DateCountdown>
 ```
 
 #### - `end-text`
@@ -65,13 +75,15 @@ Text that will be shown after the countdown ends. By default, it's `0 sec`
 <DateCountdown
   :end-date="Date.now() + 60000"
   end-text="Countdown is over! Happy Birthday!"
-/>
+  v-slot="date"
+>
+  {{ date.days }} days until Birthday...
+</DateCountdown>
 ```
 
 ## Coming soon
 
-* Ability to customize text in countdown
-* Styling and more settings
+* More settings and customization
 
 ## License
 

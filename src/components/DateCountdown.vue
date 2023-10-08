@@ -2,11 +2,13 @@
   <span class="date-countdown">
     <template v-if="isFinished">{{ endText }}</template>
 
-    <template v-else v-for="entity in entities" :key="entity.text">
-      <span v-if="entity.value" class="date-countdown__entity">
-        {{ entity.value }}{{ entity.text }}&nbsp;
-      </span>
-    </template>
+    <slot
+      v-else
+      :days="entities.days.value"
+      :hours="entities.hours.value"
+      :minutes="entities.minutes.value"
+      :seconds="entities.seconds.value"
+    ></slot>
   </span>
 </template>
 
