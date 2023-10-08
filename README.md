@@ -12,7 +12,7 @@ npm install vue-date-countdown
 
 Register locally in your component
 ```js
-import DateCountdown from 'vue-date-countdown';
+import { DateCountdown } from 'vue-date-countdown';
 
 export default {
     components: {
