@@ -39,7 +39,7 @@ Use object from `v-slot` to get access to countdown values `days`, `hours`, `min
 <DateCountdown v-slot="date" :end-date="Date.now() + 60000">
   Before Birthday:
   {{ date.days }} days
-  {{ date.hours } hours
+  {{ date.hours }} hours
   {{ date.minutes }} minutes
   {{ date.seconds }} seconds
 </DateCountdown>
@@ -80,7 +80,7 @@ The date from which the countdown began. By default, it's `new Date()`
 ```
 
 #### - `end-text`
-Text that will be shown after the countdown ends. By default, it's `"0 sec"`
+Text that will be shown after the countdown ends. By default, it's `"0 seconds"`
 
 ```html
 <DateCountdown

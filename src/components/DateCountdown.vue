@@ -28,7 +28,7 @@ const props = defineProps({
 
   endText: {
     type: String,
-    default: '0 sec',
+    default: '0 seconds',
   },
 })
 
