@@ -3,17 +3,21 @@
     <template v-if="isFinished">{{ endText }}</template>
 
     <slot
-      v-else
+      v-else-if="slots.default"
       :days="entities.days.value"
       :hours="entities.hours.value"
       :minutes="entities.minutes.value"
       :seconds="entities.seconds.value"
     ></slot>
+
+    <template v-else>
+      {{ entities.days.value }}:{{ entities.hours.value }}:{{ entities.minutes.value }}:{{ entities.seconds.value }}
+    </template>
   </span>
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, useSlots } from 'vue'
 
 const props = defineProps({
   endDate: {
@@ -31,6 +35,8 @@ const props = defineProps({
     default: '0 seconds',
   },
 })
+
+const slots = useSlots()
 
 const progress = ref(100)
 const timeInterval = ref(undefined)
