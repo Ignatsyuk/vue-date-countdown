@@ -1,6 +1,6 @@
 {
   "name": "vue-date-countdown",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Simple Vue 3 component for countdown to a specific date",
   "author": "merik",
   "keywords": [

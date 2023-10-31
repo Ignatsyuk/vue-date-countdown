@@ -80,7 +80,7 @@ The date from which the countdown began. By default, it's `new Date()`
 ```
 
 #### - `end-text`
-Text that will be shown after the countdown ends. By default, it's `"0 seconds"`
+Text that will be shown after the countdown ends
 
 ```html
 <DateCountdown
@@ -91,6 +91,9 @@ Text that will be shown after the countdown ends. By default, it's `"0 seconds"`
   {{ date.days }} days until Birthday...
 </DateCountdown>
 ```
+
+#### - `always-show-days`
+Whether to show the `days` parameter if it is equal to `0`. By default, it's `false`
 
 ## Coming soon
 

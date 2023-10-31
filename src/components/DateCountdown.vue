@@ -1,6 +1,6 @@
 <template>
   <span class="date-countdown">
-    <template v-if="isFinished">{{ endText }}</template>
+    <template v-if="isFinished && endText">{{ endText }}</template>
 
     <slot
       v-else-if="slots.default"
@@ -11,7 +11,7 @@
     ></slot>
 
     <template v-else>
-      {{ entitiesValues.days }}:{{ entitiesValues.hours }}:{{ entitiesValues.minutes }}:{{ entitiesValues.seconds }}
+      <template v-if="alwaysShowDays || Number(entities.days)">{{ entitiesValues.days }}:</template>{{ entitiesValues.hours }}:{{ entitiesValues.minutes }}:{{ entitiesValues.seconds }}
     </template>
   </span>
 </template>
@@ -32,7 +32,11 @@ const props = defineProps({
 
   endText: {
     type: String,
-    default: '0 seconds',
+  },
+
+  alwaysShowDays: {
+    type: Boolean,
+    default: false,
   },
 })
 

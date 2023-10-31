@@ -1,5 +1,5 @@
-import { useSlots as x, ref as i, computed as h, onMounted as k, onUnmounted as M, openBlock as c, createElementBlock as v, Fragment as y, createTextVNode as g, toDisplayString as a, unref as _, renderSlot as C } from "vue";
-const F = { class: "date-countdown" }, N = {
+import { useSlots as x, ref as m, computed as w, onMounted as k, onUnmounted as N, openBlock as r, createElementBlock as l, Fragment as v, createTextVNode as D, toDisplayString as o, unref as C, renderSlot as M, createCommentVNode as b } from "vue";
+const B = { class: "date-countdown" }, F = {
   __name: "DateCountdown",
   props: {
     endDate: {
@@ -11,60 +11,66 @@ const F = { class: "date-countdown" }, N = {
       default: /* @__PURE__ */ new Date()
     },
     endText: {
-      type: String,
-      default: "0 seconds"
+      type: String
+    },
+    alwaysShowDays: {
+      type: Boolean,
+      default: !1
     }
   },
-  setup(o) {
-    const u = o, w = x(), r = i(100), m = i(void 0), t = i({ days: 1, hours: 1, minutes: 1, seconds: 1 }), n = h(() => {
-      const e = (s) => Number(s) > 9 ? s : `0${s}`;
+  setup(s) {
+    const u = s, g = x(), d = m(100), y = m(void 0), t = m({ days: 1, hours: 1, minutes: 1, seconds: 1 }), n = w(() => {
+      const e = (a) => Number(a) > 9 ? a : `0${a}`;
       return {
         days: e(t.value.days),
         hours: e(t.value.hours),
         minutes: e(t.value.minutes),
         seconds: e(t.value.seconds)
       };
-    }), p = h(() => {
-      const { seconds: e, minutes: s, hours: l, days: d } = t.value;
-      return !(e > 0 || s > 0 || l > 0 || d > 0);
+    }), f = w(() => {
+      const { seconds: e, minutes: a, hours: i, days: c } = t.value;
+      return !(e > 0 || a > 0 || i > 0 || c > 0);
     });
     k(() => {
-      D(), m.value = setInterval(D, 1e3);
-    }), M(f);
-    function D() {
-      if (p.value)
-        return f();
+      p(), y.value = setInterval(p, 1e3);
+    }), N(h);
+    function p() {
+      if (f.value)
+        return h();
       S(), T();
     }
     function S() {
       const e = Date.parse(new Date(u.endDate).toString()) - Date.parse((/* @__PURE__ */ new Date()).toString());
-      e >= 0 ? (t.value.seconds = Math.floor(e / 1e3 % 60), t.value.minutes = Math.floor(e / 1e3 / 60 % 60), t.value.hours = Math.floor(e / (1e3 * 60 * 60) % 24), t.value.days = Math.floor(e / (1e3 * 60 * 60 * 24))) : (t.value.seconds = t.value.minutes = t.value.hours = t.value.days = 0, r.value = 0);
+      e >= 0 ? (t.value.seconds = Math.floor(e / 1e3 % 60), t.value.minutes = Math.floor(e / 1e3 / 60 % 60), t.value.hours = Math.floor(e / (1e3 * 60 * 60) % 24), t.value.days = Math.floor(e / (1e3 * 60 * 60 * 24))) : (t.value.seconds = t.value.minutes = t.value.hours = t.value.days = 0, d.value = 0);
     }
     function T() {
-      let e = Date.parse(new Date(u.startDate).toString()), s = Date.parse((/* @__PURE__ */ new Date()).toString()), l = Date.parse(new Date(u.endDate).toString()), d = parseFloat((s - e) / (l - e) * 100).toFixed(2);
-      r.value = 100 - d;
+      let e = Date.parse(new Date(u.startDate).toString()), a = Date.parse((/* @__PURE__ */ new Date()).toString()), i = Date.parse(new Date(u.endDate).toString()), c = parseFloat((a - e) / (i - e) * 100).toFixed(2);
+      d.value = 100 - c;
     }
-    function f() {
-      clearTimeout(m.value), r.value = 0;
+    function h() {
+      clearTimeout(y.value), d.value = 0;
     }
-    return (e, s) => (c(), v("span", F, [
-      p.value ? (c(), v(y, { key: 0 }, [
-        g(a(o.endText), 1)
-      ], 64)) : _(w).default ? C(e.$slots, "default", {
+    return (e, a) => (r(), l("span", B, [
+      f.value && s.endText ? (r(), l(v, { key: 0 }, [
+        D(o(s.endText), 1)
+      ], 64)) : C(g).default ? M(e.$slots, "default", {
         key: 1,
         days: n.value.days,
         hours: n.value.hours,
         minutes: n.value.minutes,
         seconds: n.value.seconds
-      }) : (c(), v(y, { key: 2 }, [
-        g(a(n.value.days) + ":" + a(n.value.hours) + ":" + a(n.value.minutes) + ":" + a(n.value.seconds), 1)
+      }) : (r(), l(v, { key: 2 }, [
+        s.alwaysShowDays || Number(t.value.days) ? (r(), l(v, { key: 0 }, [
+          D(o(n.value.days) + ":", 1)
+        ], 64)) : b("", !0),
+        D(o(n.value.hours) + ":" + o(n.value.minutes) + ":" + o(n.value.seconds), 1)
       ], 64))
     ]));
   }
-}, B = {
-  install: (o, u) => o.component("DateCountdown", N)
+}, I = {
+  install: (s, u) => s.component("DateCountdown", F)
 };
 export {
-  N as DateCountdown,
-  B as default
+  F as DateCountdown,
+  I as default
 };
