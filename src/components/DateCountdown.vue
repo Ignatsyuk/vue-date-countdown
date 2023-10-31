@@ -4,14 +4,14 @@
 
     <slot
       v-else-if="slots.default"
-      :days="entities.days.value"
-      :hours="entities.hours.value"
-      :minutes="entities.minutes.value"
-      :seconds="entities.seconds.value"
+      :days="entitiesValues.days"
+      :hours="entitiesValues.hours"
+      :minutes="entitiesValues.minutes"
+      :seconds="entitiesValues.seconds"
     ></slot>
 
     <template v-else>
-      {{ entities.days.value }}:{{ entities.hours.value }}:{{ entities.minutes.value }}:{{ entities.seconds.value }}
+      {{ entitiesValues.days }}:{{ entitiesValues.hours }}:{{ entitiesValues.minutes }}:{{ entitiesValues.seconds }}
     </template>
   </span>
 </template>
@@ -40,17 +40,22 @@ const slots = useSlots()
 
 const progress = ref(100)
 const timeInterval = ref(undefined)
-const entities = ref({
-  days: { text: 'd', value: 1 },
-  hours: { text: 'h', value: 1 },
-  minutes: { text: 'm', value: 1 },
-  seconds: { text: 's', value: 1 },
+const entities = ref({ days: 1, hours: 1, minutes: 1, seconds: 1 })
+const entitiesValues = computed(() => {
+  const entitieToText = (value) => Number(value) > 9 ? value : `0${value}`
+
+  return {
+    days: entitieToText(entities.value.days),
+    hours: entitieToText(entities.value.hours),
+    minutes: entitieToText(entities.value.minutes),
+    seconds: entitieToText(entities.value.seconds),
+  }
 })
 
 const isFinished = computed(() => {
   const { seconds, minutes, hours, days } = entities.value
 
-  return !(seconds.value > 0 || minutes.value > 0 || hours.value > 0 || days.value > 0)
+  return !(seconds > 0 || minutes > 0 || hours > 0 || days > 0)
 })
 
 onMounted(() => {
@@ -73,12 +78,12 @@ function getTimeRemaining() {
   const time = Date.parse(new Date(props.endDate).toString()) - Date.parse(new Date().toString())
 
   if (time >= 0) {
-    entities.value.seconds.value = Math.floor(time / 1000 % 60)
-    entities.value.minutes.value = Math.floor(time / 1000 / 60 % 60)
-    entities.value.hours.value = Math.floor(time / (1000 * 60 * 60) % 24)
-    entities.value.days.value = Math.floor(time / (1000 * 60 * 60 * 24))
+    entities.value.seconds = Math.floor(time / 1000 % 60)
+    entities.value.minutes = Math.floor(time / 1000 / 60 % 60)
+    entities.value.hours = Math.floor(time / (1000 * 60 * 60) % 24)
+    entities.value.days = Math.floor(time / (1000 * 60 * 60 * 24))
   } else {
-    entities.value.seconds.value = entities.value.minutes.value = entities.value.hours.value = entities.value.days.value = 0
+    entities.value.seconds = entities.value.minutes = entities.value.hours = entities.value.days = 0
     progress.value = 0
   }
 }

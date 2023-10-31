@@ -1,5 +1,5 @@
-import { useSlots as S, ref as v, computed as x, onMounted as T, onUnmounted as k, openBlock as d, createElementBlock as i, Fragment as f, createTextVNode as h, toDisplayString as a, unref as M, renderSlot as _ } from "vue";
-const C = { class: "date-countdown" }, F = {
+import { useSlots as x, ref as i, computed as h, onMounted as k, onUnmounted as M, openBlock as c, createElementBlock as v, Fragment as y, createTextVNode as g, toDisplayString as a, unref as _, renderSlot as C } from "vue";
+const F = { class: "date-countdown" }, N = {
   __name: "DateCountdown",
   props: {
     endDate: {
@@ -15,53 +15,56 @@ const C = { class: "date-countdown" }, F = {
       default: "0 seconds"
     }
   },
-  setup(n) {
-    const u = n, g = S(), o = v(100), c = v(void 0), e = v({
-      days: { text: "d", value: 1 },
-      hours: { text: "h", value: 1 },
-      minutes: { text: "m", value: 1 },
-      seconds: { text: "s", value: 1 }
-    }), m = x(() => {
-      const { seconds: t, minutes: s, hours: l, days: r } = e.value;
-      return !(t.value > 0 || s.value > 0 || l.value > 0 || r.value > 0);
+  setup(o) {
+    const u = o, w = x(), r = i(100), m = i(void 0), t = i({ days: 1, hours: 1, minutes: 1, seconds: 1 }), n = h(() => {
+      const e = (s) => Number(s) > 9 ? s : `0${s}`;
+      return {
+        days: e(t.value.days),
+        hours: e(t.value.hours),
+        minutes: e(t.value.minutes),
+        seconds: e(t.value.seconds)
+      };
+    }), p = h(() => {
+      const { seconds: e, minutes: s, hours: l, days: d } = t.value;
+      return !(e > 0 || s > 0 || l > 0 || d > 0);
     });
-    T(() => {
-      p(), c.value = setInterval(p, 1e3);
-    }), k(D);
-    function p() {
-      if (m.value)
-        return D();
-      y(), w();
-    }
-    function y() {
-      const t = Date.parse(new Date(u.endDate).toString()) - Date.parse((/* @__PURE__ */ new Date()).toString());
-      t >= 0 ? (e.value.seconds.value = Math.floor(t / 1e3 % 60), e.value.minutes.value = Math.floor(t / 1e3 / 60 % 60), e.value.hours.value = Math.floor(t / (1e3 * 60 * 60) % 24), e.value.days.value = Math.floor(t / (1e3 * 60 * 60 * 24))) : (e.value.seconds.value = e.value.minutes.value = e.value.hours.value = e.value.days.value = 0, o.value = 0);
-    }
-    function w() {
-      let t = Date.parse(new Date(u.startDate).toString()), s = Date.parse((/* @__PURE__ */ new Date()).toString()), l = Date.parse(new Date(u.endDate).toString()), r = parseFloat((s - t) / (l - t) * 100).toFixed(2);
-      o.value = 100 - r;
-    }
+    k(() => {
+      D(), m.value = setInterval(D, 1e3);
+    }), M(f);
     function D() {
-      clearTimeout(c.value), o.value = 0;
+      if (p.value)
+        return f();
+      S(), T();
     }
-    return (t, s) => (d(), i("span", C, [
-      m.value ? (d(), i(f, { key: 0 }, [
-        h(a(n.endText), 1)
-      ], 64)) : M(g).default ? _(t.$slots, "default", {
+    function S() {
+      const e = Date.parse(new Date(u.endDate).toString()) - Date.parse((/* @__PURE__ */ new Date()).toString());
+      e >= 0 ? (t.value.seconds = Math.floor(e / 1e3 % 60), t.value.minutes = Math.floor(e / 1e3 / 60 % 60), t.value.hours = Math.floor(e / (1e3 * 60 * 60) % 24), t.value.days = Math.floor(e / (1e3 * 60 * 60 * 24))) : (t.value.seconds = t.value.minutes = t.value.hours = t.value.days = 0, r.value = 0);
+    }
+    function T() {
+      let e = Date.parse(new Date(u.startDate).toString()), s = Date.parse((/* @__PURE__ */ new Date()).toString()), l = Date.parse(new Date(u.endDate).toString()), d = parseFloat((s - e) / (l - e) * 100).toFixed(2);
+      r.value = 100 - d;
+    }
+    function f() {
+      clearTimeout(m.value), r.value = 0;
+    }
+    return (e, s) => (c(), v("span", F, [
+      p.value ? (c(), v(y, { key: 0 }, [
+        g(a(o.endText), 1)
+      ], 64)) : _(w).default ? C(e.$slots, "default", {
         key: 1,
-        days: e.value.days.value,
-        hours: e.value.hours.value,
-        minutes: e.value.minutes.value,
-        seconds: e.value.seconds.value
-      }) : (d(), i(f, { key: 2 }, [
-        h(a(e.value.days.value) + ":" + a(e.value.hours.value) + ":" + a(e.value.minutes.value) + ":" + a(e.value.seconds.value), 1)
+        days: n.value.days,
+        hours: n.value.hours,
+        minutes: n.value.minutes,
+        seconds: n.value.seconds
+      }) : (c(), v(y, { key: 2 }, [
+        g(a(n.value.days) + ":" + a(n.value.hours) + ":" + a(n.value.minutes) + ":" + a(n.value.seconds), 1)
       ], 64))
     ]));
   }
-}, N = {
-  install: (n, u) => n.component("DateCountdown", F)
+}, B = {
+  install: (o, u) => o.component("DateCountdown", N)
 };
 export {
-  F as DateCountdown,
-  N as default
+  N as DateCountdown,
+  B as default
 };
